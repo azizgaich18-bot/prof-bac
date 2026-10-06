@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التصليح الذكي التونسية - Prof AI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f3f6;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+            text-align: right;
+        }
+        .container {
+            max-width: 750px;
+            background: white;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        h1 { color: #1e3a8a; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #64748b; margin-bottom: 25px; }
+        label { font-weight: bold; display: block; margin-top: 20px; color: #334155; }
+        input, textarea {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 25px;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #1d4ed8; }
+        .result-title { margin-top: 30px; color: #1e3a8a; }
+        .result-box {
+            margin-top: 10px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-right: 5px solid #3b82f6;
+            border-radius: 8px;
+            min-height: 80px;
+            white-space: pre-wrap;
+            line-height: 1.7;
+            font-size: 16px;
+            color: #1e293b;
+        }
+        .loading { color: #64748b; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>أستاذك الذكي التونسي 🇹🇳🤖</h1>
+    <div class="subtitle">اكتب تمرينك، اسأل سؤالك بالمنقوب أو بالدارجة، والـ AI يجاوبك ويفهمك</div>
+
+    <!-- API Key Input -->
+    <label for="apiKey">مفتاح الحماية (Gemini API Key):</label>
+    <input type="password" id="apiKey" placeholder="AIzaSy...">
+    <small style="color: #64748b;">جيب الكود بلاش من <a href="https://google.com" target="_blank" style="color: #2563eb;">Google AI Studio</a></small>
+
+    <!-- Student Input -->
+    <label for="studentInput">اكتب التمرين أو اسأل بالدارجة (عربي أو فرانكو):</label>
+    <textarea id="studentInput" rows="6" placeholder="مثال: عندي تمرين مات ليميت x ماشية لـ 0... أو اكتب بالفرانكو: 3andi exercice physique..."></textarea>
+
+    <button onclick="askAI()">تصلّيح وتحليل التمرين ✨</button>
+
+    <h3 class="result-title">التصليح والشرح البيداغوجي:</h3>
+    <div id="result" class="result-box">في انتظار سؤالك... 🤔</div>
+</div>
+
+<script>
+async function askAI() {
+    const apiKey = document.getElementById('apiKey').value.trim();
+    const studentInput = document.getElementById('studentInput').value.trim();
+    const resultDiv = document.getElementById('result');
+
+    if (!apiKey) {
+        alert("بربي حط الـ API Key أولاً باش يخدم الذكاء الاصطناعي!");
+        return;
+    }
+    if (!studentInput) {
+        alert("اكتب تمرينك ولا سؤالك قبل ما تنزل!");
+        return;
+    }
+
+    resultDiv.innerHTML = "<span class='loading'>قاعد نخمم ونصلحلك في التمرين... لحظة بركة ⏳</span>";
+
+    // Houni el-mokh mte3 l'intelligence artificial: bghat yfham tounsi mli7
+    const systemInstruction = 
+        "أنت أستاذ تونسي عبقري، طيب، ومرشد تعليمي ذكي جداً (Tunisian AI Tutor). " +
+        "مهمتك هي تصليح التمارين المدرسية والإجابة على أسئلة التلاميذ التونسيين. " +
+        "التلاميذ يمكن أن يكتبوا باللغة العربية، الفرنسية، أو بالدارجة التونسية (سواء بحروف عربية أو بحروف لاتينية وأرقام 'Franco-Arabe' مثل 3, 7, 5, 9). " +
+        "يجب أن تفهم كلامهم بدقة مهما كانت طريقة الكتابة. " +
+        "طريقة إجابتك: " +
+        "1. رحّب بالتلميذ تشجيعاً له بالدارجة التونسية (مثال: عصبة، أهلاً بيك، يعطيك الصحة...). " +
+        "2. لا تعط الإجابة مباشرة! قم بتحليل الخطأ، واشرح القاعدة بأسلوب بيداغوجي مبسط بالدارجة التونسية لتوصيل المعلومة بسهولة. " +
+        "3. قدم الحل خطوة بخطوة (Step-by-step) بلغة واضحة (العربية أو الفرنسية حسب طبيعة المادة) مع تعليقات وشرح بالدارجة.";
+
+    try {
+        // Nستعملوا Gemini 1.5 Pro لانو أذكى بـبـرشا في فهم اللغات المختلطة والفرنسية/التونسية
+        const url = `https://googleapis.com{apiKey}`;
+        
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: studentInput }]
+                }],
+                systemInstruction: {
+                    parts: [{ text: systemInstruction }]
+                },
+                generationConfig: {
+                    temperature: 0.4, // bech ykoun rasi7 w mayfalatich fil khedma
+                    maxOutputTokens: 2048
+                }
+            })
+        });
+
+        const data = await response.json();
+        
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+            resultDiv.innerText = data.candidates[0].content.parts[0].text;
+        } else {
+            resultDiv.innerText = "صار مشكل صغيّر في فهم الإجابة. ثبت من الـ API Key وإلا عاود أكتب السؤال بوضوح.";
+        }
+    } catch (error) {
+        console.error(error);
+        resultDiv.innerText = "ثما مشكلة في الاتصال بالـ Server. عاود جرّب بعد شويّ.";
+    }
+}
+</script>
+
+</body>
