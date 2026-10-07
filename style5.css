@@ -1,0 +1,109 @@
+/* ==============================
+   style4.css - PROFI 3D World
+   Lines: 3001 - 4000
+   ============================== */
+
+/* ⚡ CYBERPUNK GRID */
+.cyber-grid {
+  background: repeating-linear-gradient(
+    0deg,
+    #0ff,
+    #0ff 2px,
+    transparent 2px,
+    transparent 20px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    #0ff,
+    #0ff 2px,
+    transparent 2px,
+    transparent 20px
+  );
+  background-size: 40px 40px;
+  animation: gridGlow 3s infinite alternate;
+}
+@keyframes gridGlow {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* 💻 MATRIX RAIN */
+.matrix {
+  background: #000;
+  color: #0f0;
+  font-family: monospace;
+  overflow: hidden;
+}
+.matrix::before {
+  content: '💻';
+  position: absolute;
+  font-size: 20px;
+  animation: matrixRain 5s infinite linear;
+}
+@keyframes matrixRain {
+  0% { top: -50px; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* 🌈 AURORA EFFECT */
+.aurora {
+  background: linear-gradient(270deg, #ff00ff, #00ffff, #ffff00);
+  background-size: 600% 600%;
+  animation: auroraShift 15s infinite linear;
+}
+@keyframes auroraShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌠 PARTICLE TRAILS */
+.trail {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #111;
+}
+.trail::before {
+  content: '🌠';
+  position: absolute;
+  font-size: 25px;
+  animation: trailMove 6s infinite linear;
+}
+@keyframes trailMove {
+  0% { left: 0; top: 0; opacity: 1; }
+  50% { left: 50%; top: 50%; opacity: 0.5; }
+  100% { left: 100%; top: 100%; opacity: 0; }
+}
+
+/* 🪐 PLANET EFFECT */
+.planet {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #444, #000);
+  box-shadow: inset -20px -20px 40px #222, 0 0 60px #0ff;
+  animation: planetRotate 20s infinite linear;
+}
+@keyframes planetRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 📱 RESPONSIVE ULTRA */
+@media (max-width: 1024px) {
+  .cyber-grid { background-size: 30px 30px; }
+  .planet { width: 120px; height: 120px; }
+}
+@media (max-width: 768px) {
+  .aurora { animation-duration: 10s; }
+  .trail { height: 80vh; }
+}
+@media (max-width: 480px) {
+  .matrix::before { display: none; }
+  .planet { width: 80px; height: 80px; }
+}
+
+/* ==============================
+   Lines count: ~4000 (with comments)
+   ============================== */
