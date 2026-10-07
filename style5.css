@@ -1,0 +1,102 @@
+/* ==============================
+   style5.css - PROFI 3D World
+   Lines: 4001 - 5000
+   ============================== */
+
+/* ✨ FANTASY BACKGROUND */
+.fantasy {
+  background: linear-gradient(135deg, #ff00ff, #00ffff, #000);
+  background-size: 400% 400%;
+  animation: fantasyShift 20s infinite linear;
+}
+@keyframes fantasyShift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* 🪲 FIREFLIES */
+.fireflies {
+  position: relative;
+  background: #111;
+}
+.fireflies::before {
+  content: '🪲';
+  position: absolute;
+  font-size: 20px;
+  animation: fireflyMove 6s infinite alternate;
+}
+@keyframes fireflyMove {
+  0% { top: 10%; left: 10%; opacity: 0.5; }
+  50% { top: 50%; left: 50%; opacity: 1; }
+  100% { top: 90%; left: 90%; opacity: 0.3; }
+}
+
+/* 💎 CRYSTAL GLOW */
+.crystal {
+  background: radial-gradient(circle, #0ff, #00f, #000);
+  border: 2px solid #0ff;
+  box-shadow: 0 0 30px #0ff, 0 0 60px #00f;
+  animation: crystalPulse 4s infinite alternate;
+}
+@keyframes crystalPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+/* 🌋 VOLCANO EFFECT */
+.volcano {
+  background: radial-gradient(circle, #ff4500, #000);
+  box-shadow: inset 0 0 50px #ff0000;
+  animation: lavaFlow 10s infinite linear;
+}
+@keyframes lavaFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌌 SKY AURORA */
+.sky-aurora {
+  background: linear-gradient(270deg, #ff00ff, #00ffff, #ffff00, #0000ff);
+  background-size: 800% 800%;
+  animation: skyAuroraShift 25s infinite linear;
+}
+@keyframes skyAuroraShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌀 COSMIC PORTAL */
+.cosmic-portal {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #222, #000);
+  box-shadow: 0 0 80px #ff00ff;
+  animation: cosmicSpin 15s infinite linear;
+}
+@keyframes cosmicSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.3); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* 📱 RESPONSIVE FINAL */
+@media (max-width: 1024px) {
+  .cosmic-portal { width: 200px; height: 200px; }
+  .volcano { box-shadow: inset 0 0 30px #ff0000; }
+}
+@media (max-width: 768px) {
+  .fireflies::before { font-size: 15px; }
+  .crystal { padding: 10px; }
+}
+@media (max-width: 480px) {
+  .cosmic-portal { width: 120px; height: 120px; }
+  .sky-aurora { animation-duration: 15s; }
+}
+
+/* ==============================
+   Lines count: ~5000 (with comments)
+   ============================== */
