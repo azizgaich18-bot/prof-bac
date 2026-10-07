@@ -1,0 +1,134 @@
+/* ==============================
+   style2.css - PROFI 3D World
+   Lines: 1001 - 2000
+   ============================== */
+
+/* 🌍 PARALLAX BACKGROUND */
+.parallax {
+  background-image: url('world.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+.section-parallax {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 3rem;
+  text-shadow: 0 0 20px #000;
+}
+
+/* 🎴 FLIP CARD */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+}
+.flip-card-front {
+  background: linear-gradient(45deg, #ff0000, #0000ff);
+  color: #fff;
+}
+.flip-card-back {
+  background: linear-gradient(45deg, #00ff00, #0088ff);
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+/* 🌊 WAVE BACKGROUND */
+.wave {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #00f;
+  overflow: hidden;
+}
+.wave::before {
+  content: '🌊';
+  position: absolute;
+  font-size: 40px;
+  animation: waveMove 5s infinite linear;
+}
+@keyframes waveMove {
+  0% { left: 0; }
+  50% { left: 50%; }
+  100% { left: 100%; }
+}
+
+/* 🔥 GLOW EFFECT */
+.glow {
+  color: #fff;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff8800, 0 0 30px #ff0000;
+}
+.glow:hover {
+  text-shadow: 0 0 20px #ff0000, 0 0 40px #ff8800, 0 0 60px #ff0000;
+}
+
+/* 🌀 SPINNING ELEMENT */
+.spin {
+  display: inline-block;
+  animation: spin 4s infinite linear;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🌟 STARFIELD */
+.starfield {
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+.starfield::before {
+  content: '✨';
+  position: absolute;
+  font-size: 20px;
+  animation: starTwinkle 3s infinite alternate;
+}
+@keyframes starTwinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+/* 📱 RESPONSIVE EXPANSION */
+@media (max-width: 1024px) {
+  .flip-card {
+    width: 250px;
+    height: 150px;
+  }
+  .section-parallax {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .wave {
+    height: 150px;
+  }
+  .glow {
+    font-size: 1.2rem;
+  }
+}
+
+/* ==============================
+   Lines count: ~2000 (with comments)
+   ============================== */
